@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.doinforfun.data.LoginRequest
+import com.example.doinforfun.data.remote.dto.LoginRequest
+import com.example.doinforfun.data.remote.dto.LoginResponse
 import com.example.doinforfun.data.repository.DoInForFunRepoImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,7 +18,7 @@ class DoinViewModel @Inject constructor(
 
     private val email = MutableLiveData<String>()
     private val password = MutableLiveData<String>()
-    val at : LiveData<String> = repoImpl.accessToken
+    val at : LiveData<LoginResponse> get() = repoImpl.accessToken
 
     fun login(loginRequest: LoginRequest){
         viewModelScope.launch {

@@ -14,7 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.doinforfun.data.LoginRequest
+import com.example.doinforfun.data.remote.dto.LoginRequest
 
 
 @Composable
@@ -46,7 +46,9 @@ fun LoginScreen(viewModel: DoinViewModel = hiltViewModel()) {
             Text(text = "Login")
         }
 
-        Text(text = at.toString(), fontSize = 20.sp)
+        if (at != null) {
+            Text(text = at.token, fontSize = 20.sp)
+        }
     }
 }
 

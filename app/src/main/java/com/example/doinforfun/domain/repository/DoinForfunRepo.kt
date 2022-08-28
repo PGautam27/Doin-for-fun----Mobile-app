@@ -1,6 +1,6 @@
 package com.example.doinforfun.domain.repository
 
-import com.example.doinforfun.data.LoginRequest
+import com.example.doinforfun.data.remote.dto.LoginRequest
 
 interface DoinForfunRepo {
 

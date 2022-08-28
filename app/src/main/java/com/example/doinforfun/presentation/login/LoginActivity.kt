@@ -1,22 +1,21 @@
 package com.example.doinforfun.presentation.login
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.doinforfun.data.LoginRequest
 import com.example.doinforfun.presentation.DoinViewModel
 import com.example.doinforfun.presentation.login.ui.theme.DoinForFunTheme
 
@@ -33,6 +32,7 @@ class LoginActivity : ComponentActivity() {
 
 @Composable
 fun LoginScreen(viewModel: DoinViewModel = hiltViewModel()) {
+    val context = LocalContext.current
     val email = remember {
         mutableStateOf(String())
     }
@@ -45,7 +45,19 @@ fun LoginScreen(viewModel: DoinViewModel = hiltViewModel()) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        OutlinedTextField(value = email.value, onValueChange ={email.value=it})
+        OutlinedTextField(value = email.value, onValueChange ={email.value=it}, label = { Text(text = "Email")})
+        Spacer(modifier = Modifier.padding(vertical = 20.dp))
+        OutlinedTextField(value = password.value, onValueChange = {password.value = it}, label = {Text(text = "Password")})
+        Button(onClick = {
+            if (email.value == null || password.value == null){
+                Toast.makeText(context, "First fill the mail and password", Toast.LENGTH_SHORT).show()
+                return@Button
+            }
+            else viewModel.login(LoginRequest(email = email.value, password = password.value))
+        }) {
+            Text(text = "Login")
+        }
+
     }
 }
 

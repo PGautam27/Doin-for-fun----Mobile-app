@@ -25,7 +25,7 @@ class LoginActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             DoinForFunTheme {
-
+                LoginScreen()
             }
         }
     }
@@ -60,7 +60,7 @@ fun LoginScreen(viewModel: DoinViewModel = hiltViewModel()) {
             Text(text = "Login")
         }
 
-        Text(text = "at", fontSize = 20.sp)
+        Text(text = at.toString(), fontSize = 20.sp)
     }
 }
 

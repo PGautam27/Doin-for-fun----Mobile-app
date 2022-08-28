@@ -5,6 +5,7 @@ import com.example.doinforfun.data.LoginResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 
+
 interface DoinForFunApi {
 
     @POST("/user/login")

@@ -1,35 +1,21 @@
-package com.example.doinforfun.presentation.login
+package com.example.doinforfun.presentation
 
-import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.doinforfun.data.LoginRequest
-import com.example.doinforfun.presentation.DoinViewModel
-import com.example.doinforfun.presentation.login.ui.theme.DoinForFunTheme
 
-class LoginActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            DoinForFunTheme {
-                LoginScreen()
-            }
-        }
-    }
-}
 
 @Composable
 fun LoginScreen(viewModel: DoinViewModel = hiltViewModel()) {
@@ -47,9 +33,9 @@ fun LoginScreen(viewModel: DoinViewModel = hiltViewModel()) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        OutlinedTextField(value = email.value, onValueChange ={email.value=it}, label = { Text(text = "Email")})
+        OutlinedTextField(value = email.value, onValueChange ={email.value=it}, label = { Text(text = "Email") })
         Spacer(modifier = Modifier.padding(vertical = 20.dp))
-        OutlinedTextField(value = password.value, onValueChange = {password.value = it}, label = {Text(text = "Password")})
+        OutlinedTextField(value = password.value, onValueChange = {password.value = it}, label = { Text(text = "Password") })
         Button(onClick = {
             if (email.value == null || password.value == null){
                 Toast.makeText(context, "First fill the mail and password", Toast.LENGTH_SHORT).show()

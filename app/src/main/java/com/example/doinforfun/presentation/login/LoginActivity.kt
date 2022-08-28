@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.doinforfun.data.LoginRequest
 import com.example.doinforfun.presentation.DoinViewModel
@@ -33,6 +34,7 @@ class LoginActivity : ComponentActivity() {
 @Composable
 fun LoginScreen(viewModel: DoinViewModel = hiltViewModel()) {
     val context = LocalContext.current
+    val at = viewModel.at.value
     val email = remember {
         mutableStateOf(String())
     }
@@ -58,6 +60,7 @@ fun LoginScreen(viewModel: DoinViewModel = hiltViewModel()) {
             Text(text = "Login")
         }
 
+        Text(text = "at", fontSize = 20.sp)
     }
 }
 

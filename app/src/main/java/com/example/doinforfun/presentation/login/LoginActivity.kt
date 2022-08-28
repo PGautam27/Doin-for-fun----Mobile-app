@@ -16,6 +16,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.doinforfun.presentation.DoinViewModel
 import com.example.doinforfun.presentation.login.ui.theme.DoinForFunTheme
 
 class LoginActivity : ComponentActivity() {
@@ -30,7 +32,7 @@ class LoginActivity : ComponentActivity() {
 }
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(viewModel: DoinViewModel = hiltViewModel()) {
     val email = remember {
         mutableStateOf(String())
     }

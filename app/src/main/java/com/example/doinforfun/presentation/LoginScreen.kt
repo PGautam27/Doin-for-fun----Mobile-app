@@ -1,5 +1,6 @@
 package com.example.doinforfun.presentation
 
+import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -15,8 +16,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.doinforfun.data.remote.dto.LoginRequest
+import kotlinx.coroutines.*
 
 
+@OptIn(DelicateCoroutinesApi::class)
+@SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun LoginScreen(viewModel: DoinViewModel = hiltViewModel()) {
     val context = LocalContext.current
@@ -37,11 +41,7 @@ fun LoginScreen(viewModel: DoinViewModel = hiltViewModel()) {
         Spacer(modifier = Modifier.padding(vertical = 20.dp))
         OutlinedTextField(value = password.value, onValueChange = {password.value = it}, label = { Text(text = "Password") })
         Button(onClick = {
-            if (email.value == null || password.value == null){
-                Toast.makeText(context, "First fill the mail and password", Toast.LENGTH_SHORT).show()
-                return@Button
-            }
-            else viewModel.login(LoginRequest(email = email.value, password = password.value))
+            viewModel.login(LoginRequest(email = email.value, password = password.value))
         }) {
             Text(text = "Login")
         }
@@ -49,6 +49,8 @@ fun LoginScreen(viewModel: DoinViewModel = hiltViewModel()) {
         if (at != null) {
             Text(text = at.token, fontSize = 20.sp)
         }
+        Text(text = viewModel.ol.value.toString())
+        
     }
 }
 

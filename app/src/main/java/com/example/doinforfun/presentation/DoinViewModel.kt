@@ -19,7 +19,7 @@ class DoinViewModel @Inject constructor(
     private val email = MutableLiveData<String>()
     private val password = MutableLiveData<String>()
     val at : LiveData<LoginResponse> get() = repoImpl.accessToken
-
+    val ol : LiveData<String> get() = repoImpl.hola
     fun login(loginRequest: LoginRequest){
         viewModelScope.launch {
             repoImpl.login(loginRequest)

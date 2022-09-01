@@ -12,13 +12,15 @@ class DoInForFunRepoImpl @Inject constructor(
 ): DoinForfunRepo {
 
     val accessToken = MutableLiveData<LoginResponse>()
-
+    val hola = MutableLiveData<String>("hola")
     override suspend fun login(loginRequest: LoginRequest) {
         api.login(loginRequest)
             .onSuccess { result ->
                 accessToken.value = result
+                hola.value = "alolalalalala"
             }
             .onFailure {
+                hola.value = "Failure"
 
             }
     }

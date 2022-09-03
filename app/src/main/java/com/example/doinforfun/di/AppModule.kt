@@ -24,7 +24,7 @@ object AppModule {
     @Provides
     @Singleton
     fun doInForFunApi(gson: Gson) : Retrofit = Retrofit.Builder()
-        .baseUrl("https://fun-node.herokuapp.com/api/v1/")
+        .baseUrl("http://192.168.137.110:5020/api/v1/")
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(OkHttpClient.Builder().addInterceptor(HttpLoggingInterceptor()).build())
         .build()

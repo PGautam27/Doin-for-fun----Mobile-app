@@ -7,6 +7,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -25,6 +26,7 @@ import kotlinx.coroutines.*
 fun LoginScreen(viewModel: DoinViewModel = hiltViewModel()) {
     val context = LocalContext.current
     val at = viewModel.at.value
+    val att = viewModel.token.observeAsState()
     val email = remember {
         mutableStateOf(String())
     }
@@ -37,19 +39,21 @@ fun LoginScreen(viewModel: DoinViewModel = hiltViewModel()) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        OutlinedTextField(value = email.value, onValueChange ={email.value=it}, label = { Text(text = "Email") })
+        OutlinedTextField(value = email.value, onValueChange ={email.value=it}, label = { Text(text = "Phone") })
         Spacer(modifier = Modifier.padding(vertical = 20.dp))
         OutlinedTextField(value = password.value, onValueChange = {password.value = it}, label = { Text(text = "Password") })
         Button(onClick = {
-            viewModel.login(LoginRequest(email = email.value, password = password.value))
+            viewModel.login(LoginRequest(phone = email.value.toInt(), password = password.value))
         }) {
             Text(text = "Login")
         }
 
-        if (at != null) {
-            Text(text = at.token, fontSize = 20.sp)
-        }
-        Text(text = viewModel.ol.value.toString())
+        
+        Text(text = at?.token.toString(), fontSize = 20.sp)
+        Spacer(modifier = Modifier.padding(20.dp))
+        Text(text = att.value.toString(), fontSize = 30.sp)
+        
+        Text(text = viewModel.ol.observeAsState().value.toString())
         
     }
 }
